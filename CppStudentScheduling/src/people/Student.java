@@ -1,4 +1,9 @@
+package people;
+
 import java.util.List;
+
+import majors.Major;
+import course.Coursee;
 
 /*
 *Ali alAali
@@ -20,11 +25,18 @@ public class Student {
 	private String level;	//CH CR BR AR
 	//private String department;
 	private String major;
+	private Major majorr;
 
 	private char gender;
 	
-	private List<Course> courses; //That are must to graduate according to the major
+	private List<Coursee> courses; //That are must to graduate according to the major
 	
+	public Student(String name, int badge, String lvl, Major major){
+		this.name = name;
+		this.badge  = badge;
+		this.level = lvl;
+		this.majorr = major;
+	}
 	
 	public String getLevel(){
 		return level;
@@ -34,8 +46,10 @@ public class Student {
 		return track;
 	}
 	
-	public String getMajor(){
-		return major;
+	
+	
+	public Major getMajor(){
+		return majorr;
 	}
 
 }

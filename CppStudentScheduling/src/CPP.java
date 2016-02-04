@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import people.Student;
+import people.Teacher;
+import majors.Major;
+
 /*
 *Ali alAali
 *781735
@@ -13,6 +17,7 @@ public class CPP {
 	 */
 
 	private Course[] courses; // array of offered courses
+	private Major[] majorrs;
 
 	private List<Teacher> teachers;
 	private List<Student> students;

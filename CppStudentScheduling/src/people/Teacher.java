@@ -1,4 +1,5 @@
-import java.util.List;
+package people;
+import course.Coursee;
 
 /*
 *Ali alAali
@@ -14,7 +15,7 @@ public class Teacher {
 	private int overTime;	//	number of overtime working hours.
 
 	
-	private Course[] teach;//courses the teacher can teaches.
+	private Coursee[] teach;//courses the teacher can teaches.
 	private String name;
 	private String department;
 }

@@ -1,5 +1,7 @@
 import java.util.List;
 
+import people.Student;
+
 /*
 *Ali alAali
 *781735

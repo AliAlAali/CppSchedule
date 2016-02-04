@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import people.Teacher;
+
 /*
 *Ali alAali
 *781735

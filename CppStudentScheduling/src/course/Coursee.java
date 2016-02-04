@@ -1,20 +1,20 @@
+package course;
+
+import majors.Major;
 import people.Student;
 
 
-/*
-*Ali alAali
-*781735
-*/
+public class Coursee {
 
-public class Course {
 
-	private Qualifiable qualifiable;
+
 	
 	private int credit; // used to prioritize the course over other courses. + balance the schedule. 
 	private int periodsPerWeek;
 	private int periodsADay;
 
-	private Course required;
+	private Coursee required;
+	private Major[] strictTo;
 	
 	private String specialRequirement; // like gym, lab, computer lab
 	private String subject;
@@ -23,40 +23,55 @@ public class Course {
 	private boolean honor;
 	private boolean priority;
 	
-	public Course(String subject, String tool, Course required, boolean priority){
+	public Coursee(String subject, String tool, Coursee required, boolean priority){
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
 		this.priority = priority;
 		this.honor = false;
+		this.strictTo = null;
 	}
 	
-	public Course(String subject,int dailyPer, String tool, Course required, boolean priority){
+	public Coursee(String subject,int dailyPer, String tool, Coursee required, boolean priority){
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
 		this.priority = priority;
 		this.honor = false;
 		this.periodsADay = dailyPer;
+		this.strictTo = null;
 	}
 	
-	public Course(String subject, String tool, Course required, boolean priority, boolean honor){
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor){
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
 		this.priority = priority;
 		this.honor = honor;
+		this.strictTo = null;
 	}
 	
-	public Course(String subject, String tool, Course required, boolean priority, boolean honor ,Qualifiable qualifiable){
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor,Major strict){
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
 		this.priority = priority;
 		this.honor = honor;
-		this.qualifiable = qualifiable;
+		this.strictTo = new Major[1];
+		this.strictTo[0] = strict;
 	}
-
+	
+	
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor,Major[] strict){
+		this.subject = subject;
+		this.specialRequirement = tool;
+		this.required = required;
+		this.priority = priority;
+		this.honor = honor;
+		this.strictTo = strict;
+	}
+	
+	
 	public int getCredit() {
 		return credit;
 	}
@@ -73,11 +88,11 @@ public class Course {
 		this.periodsPerWeek = periodsPerWeek;
 	}
 
-	public Course getRequired() {
+	public Coursee getRequired() {
 		return required;
 	}
 
-	public void setRequired(Course required) {
+	public void setRequired(Coursee required) {
 		this.required = required;
 	}
 
@@ -117,21 +132,21 @@ public class Course {
 		return honor;
 	}
 	
-	public void setQualifiable(Qualifiable qualifiable){
-		this.qualifiable = qualifiable;
-	}
-	
-	public boolean checkQualification(Student student){
-		if(qualifiable == null){
+	public boolean isQualified(Student student){
+		if(strictTo == null){
 			return true;
-		}else{
-			return qualifiable.isQualified(student);
 		}
+		for (int i = 0; i < strictTo.length; i++) {
+			if(student.getMajor().equals(strictTo[i])){
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public interface Qualifiable{
-		public boolean isQualified(Student student);
-	}
+	
 	
 
 }
+
+
