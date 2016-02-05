@@ -1,4 +1,7 @@
 package majors;
+
+import course.Coursee;
+
 /*
 *Ali alAali
 *781735
@@ -6,13 +9,11 @@ package majors;
 
 public class Major {
 
-	protected String title;
+	protected Coursee  courses[];
 	
-	public Major(String major){
-		title = major;
+	public Major(){
+		
 	}
 	
-	public String getMajor(){
-		return title;
-	}
+	
 }

@@ -1,29 +1,29 @@
 package course;
 
+import core.CPP;
 import majors.Major;
 import people.Student;
 
-
 public class Coursee {
 
-
-
-	
-	private int credit; // used to prioritize the course over other courses. + balance the schedule. 
+	private int credit; // used to prioritize the course over other courses. +
+						// balance the schedule.
 	private int periodsPerWeek;
 	private int periodsADay;
 
 	private Coursee required;
 	private Major[] strictTo;
-	
+
 	private String specialRequirement; // like gym, lab, computer lab
 	private String subject;
-	
+	private String level;
+
 	private boolean passed;
 	private boolean honor;
 	private boolean priority;
-	
-	public Coursee(String subject, String tool, Coursee required, boolean priority){
+
+	public Coursee(String subject, String tool, Coursee required,
+			boolean priority) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -31,18 +31,21 @@ public class Coursee {
 		this.honor = false;
 		this.strictTo = null;
 	}
-	
-	public Coursee(String subject,int dailyPer, String tool, Coursee required, boolean priority){
+
+	public Coursee(String subject, int dailyPer, int weekPer, String tool,
+			Coursee required, boolean priority) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
 		this.priority = priority;
 		this.honor = false;
 		this.periodsADay = dailyPer;
+		this.periodsPerWeek = weekPer;
 		this.strictTo = null;
 	}
-	
-	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor){
+
+	public Coursee(String subject, String tool, Coursee required,
+			boolean priority, boolean honor) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -50,8 +53,9 @@ public class Coursee {
 		this.honor = honor;
 		this.strictTo = null;
 	}
-	
-	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor,Major strict){
+
+	public Coursee(String subject, String tool, Coursee required,
+			boolean priority, boolean honor, Major strict) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -60,9 +64,9 @@ public class Coursee {
 		this.strictTo = new Major[1];
 		this.strictTo[0] = strict;
 	}
-	
-	
-	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor,Major[] strict){
+
+	public Coursee(String subject, String tool, Coursee required,
+			boolean priority, boolean honor, Major[] strict) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -70,8 +74,7 @@ public class Coursee {
 		this.honor = honor;
 		this.strictTo = strict;
 	}
-	
-	
+
 	public int getCredit() {
 		return credit;
 	}
@@ -131,22 +134,67 @@ public class Coursee {
 	public boolean isHonor() {
 		return honor;
 	}
-	
-	public boolean isQualified(Student student){
-		if(strictTo == null){
+
+	public int getPeriodsADay() {
+		return periodsADay;
+	}
+
+	public void setPeriodsADay(int periodsADay) {
+		this.periodsADay = periodsADay;
+	}
+
+	public boolean isQualified(Student student) {
+		if (strictTo == null) {
 			return true;
 		}
 		for (int i = 0; i < strictTo.length; i++) {
-			if(student.getMajor().equals(strictTo[i])){
+			if (student.getMajor().equals(strictTo[i])) {
 				return true;
 			}
 		}
 		return false;
 	}
+
+	public boolean canStudy(Student student) {
+		int diff = CPP.getDifficulty(getLevel());
+		int stDif = CPP.getDifficulty(student.getLevel());
+		if(!isQualified(student)){
+			return false;
+		}
+		if(diff == 0){
+			return hasPassedReq(student);
+		}else if(diff > 0){
+			if(diff <= stDif){
+				return hasPassedReq(student);
+			}
+		}else{
+			if(diff <= stDif && stDif < 0){
+				return hasPassedReq(student);
+			}
+		}
+		return false;
+	}
 	
-	
-	
+	public boolean hasPassedReq(Student student){
+		if (required != null) {
+			for (int i = 0; i < student.getCourses().size(); i++) {
+				if (student.getCourses().get(i).getSubject()
+						.equals(required.getSubject())) {
+					return student.getCourses().get(i).isPassed();
+				}
+			}
+		}else{
+			return true;
+		}
+		return false;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
 }
-
-

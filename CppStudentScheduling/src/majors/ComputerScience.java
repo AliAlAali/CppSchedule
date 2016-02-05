@@ -6,8 +6,8 @@ package majors;
 
 public class ComputerScience extends Major{
 
-	public ComputerScience(String major) {
-		super(major);
+	public ComputerScience() {
+		
 	}
 
 	
