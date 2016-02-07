@@ -8,12 +8,12 @@ import course.Coursee;
 */
 
 public class Major {
-
-	protected Coursee  courses[];
 	
-	public Major(){
-		
-	}
+	protected Coursee[] courses;
+
+	public Coursee[] prepareCourses(){
+		return courses;
+		}
 	
 	
 }

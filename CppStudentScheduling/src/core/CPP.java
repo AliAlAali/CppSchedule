@@ -114,6 +114,15 @@ public class CPP {
 			return 2;
 		}
 	}
+	
+	public Coursee findCourse(String subject){
+		for (int i = 0; i < courses.length; i++) {
+			if(courses[i].getSubject().equals(subject)){
+				return courses[i];
+			}
+		}
+		return null;
+	}
 
 	private Coursee[] prepareCourses() {
 //		// Qualification for CH students only

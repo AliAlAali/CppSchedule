@@ -22,8 +22,7 @@ public class Coursee {
 	private boolean honor;
 	private boolean priority;
 
-	public Coursee(String subject, String tool, Coursee required,
-			boolean priority) {
+	public Coursee(String subject, String tool, Coursee required, boolean priority) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -32,8 +31,7 @@ public class Coursee {
 		this.strictTo = null;
 	}
 
-	public Coursee(String subject, int dailyPer, int weekPer, String tool,
-			Coursee required, boolean priority) {
+	public Coursee(String subject, int dailyPer, int weekPer, String tool, Coursee required, boolean priority) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -44,8 +42,7 @@ public class Coursee {
 		this.strictTo = null;
 	}
 
-	public Coursee(String subject, String tool, Coursee required,
-			boolean priority, boolean honor) {
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -54,8 +51,7 @@ public class Coursee {
 		this.strictTo = null;
 	}
 
-	public Coursee(String subject, String tool, Coursee required,
-			boolean priority, boolean honor, Major strict) {
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor, Major strict) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -65,8 +61,7 @@ public class Coursee {
 		this.strictTo[0] = strict;
 	}
 
-	public Coursee(String subject, String tool, Coursee required,
-			boolean priority, boolean honor, Major[] strict) {
+	public Coursee(String subject, String tool, Coursee required, boolean priority, boolean honor, Major[] strict) {
 		this.subject = subject;
 		this.specialRequirement = tool;
 		this.required = required;
@@ -135,6 +130,10 @@ public class Coursee {
 		return honor;
 	}
 
+	public void setHonor(boolean h) {
+		this.honor = h;
+	}
+
 	public int getPeriodsADay() {
 		return periodsADay;
 	}
@@ -155,38 +154,77 @@ public class Coursee {
 		return false;
 	}
 
+	public static boolean isInstanceOf(Object father, Object son) {
+		Object c = son;
+		if(son.getClass().getSimpleName().equals(father.getClass().getSimpleName())){
+			return true;
+		}
+		while (!c.getClass().getSuperclass().getSimpleName().equals("Object")) {
+			if (son.getClass().getSuperclass().getSimpleName().equals(father.getClass().getSimpleName())) {
+				return true;
+			}
+			c = c.getClass().getSuperclass();
+		}
+		return false;
+	}
+
 	public boolean canStudy(Student student) {
 		int diff = CPP.getDifficulty(getLevel());
 		int stDif = CPP.getDifficulty(student.getLevel());
-		if(!isQualified(student)){
+		if (!isQualified(student)) {
 			return false;
 		}
-		if(diff == 0){
+		if (diff == 0) {
 			return hasPassedReq(student);
-		}else if(diff > 0){
-			if(diff <= stDif){
+		} else if (diff > 0) {
+			if (diff <= stDif) {
 				return hasPassedReq(student);
 			}
-		}else{
-			if(diff <= stDif && stDif < 0){
+		} else {
+			if (diff <= stDif && stDif < 0) {
 				return hasPassedReq(student);
 			}
 		}
 		return false;
 	}
-	
-	public boolean hasPassedReq(Student student){
+
+	public boolean hasPassedReq(Student student) {
 		if (required != null) {
 			for (int i = 0; i < student.getCourses().size(); i++) {
-				if (student.getCourses().get(i).getSubject()
-						.equals(required.getSubject())) {
+				if (student.getCourses().get(i).getSubject().equals(required.getSubject())) {
 					return student.getCourses().get(i).isPassed();
 				}
 			}
-		}else{
+		} else {
 			return true;
 		}
 		return false;
+	}
+
+	public static Coursee[] mergeCourses(Coursee[] c1, Coursee[] c2) {
+		if (c1 == null || c2 == null) {
+			if (c1 == null && c2 != null) {
+				return c2;
+			} else if (c1 != null && c2 == null) {
+				return c1;
+			} else {
+				return null;
+			}
+		}
+		Coursee[] c = new Coursee[c1.length + c2.length];
+		int ind = 0;
+		for (int i = 0; i < c.length; i++) {
+			if (i < c1.length) {
+				c[i] = c1[i];
+			} else {
+				if (ind < c2.length) {
+					c[i] = c2[ind];
+					ind++;
+				}
+			}
+		}
+
+		return c;
 	}
 
 	public String getLevel() {
