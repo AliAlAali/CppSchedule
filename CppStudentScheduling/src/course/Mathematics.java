@@ -11,12 +11,6 @@ public class Mathematics extends Coursee{
 		setLevel(CPP.LVL_ALL);
 	}
 
-	public Mathematics(String subject, int dailyPer, int weekPer, String tool, Coursee required, boolean priority, boolean honor, Major strict) {
-		super(subject, tool, required, priority, honor, strict);
-		setLevel(CPP.LVL_ALL);
-		setPeriodsADay(dailyPer);
-		setPeriodsPerWeek(weekPer);
-		}
 
 	public Mathematics(String subject, int dailyPer, int weekPer, String tool, Coursee required, boolean priority, boolean honor, Major[] strict) {
 		super(subject, tool, required, priority, honor, strict);

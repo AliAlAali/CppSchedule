@@ -6,4 +6,8 @@ public class ComputerEngineer extends Physics{
 		
 	}
 
+	@Override
+	public boolean instanceOf(Object son) {
+		return super.isInstanceOf(new ComputerEngineer(), son);
+	}
 }

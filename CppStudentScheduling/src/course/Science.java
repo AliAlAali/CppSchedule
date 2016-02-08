@@ -12,12 +12,7 @@ public class Science extends Coursee{
 		setLevel(CPP.LVL_ALL);
 	}
 
-	public Science(String subject,int dailyPer, int weekPer ,String tool, Coursee required, boolean priority, boolean honor, Major strict) {
-		super(subject, tool, required, priority, honor, strict);
-		setPeriodsPerWeek(weekPer);
-		setPeriodsADay(dailyPer);
-		setLevel(CPP.LVL_ALL);
-	}
+	
 
 	public Science(String subject,int dailyPer, int weekPer ,String tool, Coursee required, boolean priority, boolean honor, Major[] strict) {
 		super(subject, tool, required, priority, honor, strict);

@@ -6,4 +6,8 @@ public class Geology extends Physics{
 		
 	}
 
+	@Override
+	public boolean instanceOf(Object son) {
+		return super.isInstanceOf(new Geology(), son);
+	}
 }

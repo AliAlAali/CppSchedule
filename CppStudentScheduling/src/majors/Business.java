@@ -6,4 +6,8 @@ public class Business extends Major{
 		
 	}
 
+	@Override
+	public boolean instanceOf(Object son) {
+		return super.isInstanceOf(new Business(), son);
+	}
 }

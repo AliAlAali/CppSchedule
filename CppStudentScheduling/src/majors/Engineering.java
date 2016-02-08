@@ -10,13 +10,8 @@ public class Engineering extends Major{
 	}
 	
 	@Override
-	public Coursee[] prepareCourses() {
-		
-		Coursee apca040 = new Mathematics("APCA040", null, null, true);//TODO should be fixed later
-		
-		Coursee[] c = {};
-		return c;
+	public boolean instanceOf(Object son) {
+		return super.isInstanceOf(new Engineering(), son);
 	}
-
 	
 }

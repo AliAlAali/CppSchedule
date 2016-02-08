@@ -89,9 +89,24 @@ public class Student {
 		}
 	}
 	
-	public void printCourses(){
+	public void printAllCourses(){
 		for (int i = 0; i < courses.size(); i++) {
 			System.out.print(courses.get(i).getSubject() + " ");
+		}
+		System.out.println();
+	}
+	
+	public void printCurrentCourses(){
+		for (Coursee coursee : courses) {
+			if(!coursee.isPassed())
+				System.out.print(coursee.getSubject() + " ");
+		}
+		System.out.println();
+	}
+	
+	public void passAllCourses(){
+		for (Coursee coursee : courses) {
+			coursee.setPassed(true);
 		}
 	}
 

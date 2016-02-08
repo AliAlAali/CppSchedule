@@ -13,6 +13,7 @@ public class Coursee {
 
 	private Coursee required;
 	private Major[] strictTo;
+	
 
 	private String specialRequirement; // like gym, lab, computer lab
 	private String subject;
@@ -147,26 +148,14 @@ public class Coursee {
 			return true;
 		}
 		for (int i = 0; i < strictTo.length; i++) {
-			if (student.getMajor().equals(strictTo[i])) {
+			if (Major.isInstanceOf(strictTo[i], student.getMajor())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean isInstanceOf(Object father, Object son) {
-		Object c = son;
-		if(son.getClass().getSimpleName().equals(father.getClass().getSimpleName())){
-			return true;
-		}
-		while (!c.getClass().getSuperclass().getSimpleName().equals("Object")) {
-			if (son.getClass().getSuperclass().getSimpleName().equals(father.getClass().getSimpleName())) {
-				return true;
-			}
-			c = c.getClass().getSuperclass();
-		}
-		return false;
-	}
+	
 
 	public boolean canStudy(Student student) {
 		int diff = CPP.getDifficulty(getLevel());
