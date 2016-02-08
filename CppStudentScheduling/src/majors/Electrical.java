@@ -3,7 +3,7 @@ package majors;
 public class Electrical extends Physics{
 
 	public Electrical() {
-	
+		this.title = "Electrical";
 	}
 
 	@Override

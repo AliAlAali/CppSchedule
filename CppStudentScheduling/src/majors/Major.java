@@ -10,6 +10,7 @@ import course.Coursee;
 public class Major {
 	
 	protected Coursee[] courses;
+	protected String title;
 
 	public Coursee[] prepareCourses(){
 		return courses;
@@ -33,5 +34,7 @@ public class Major {
 	public boolean instanceOf(Object son){
 		return isInstanceOf(new Major(), son);
 	}
+	
+	
 	
 }

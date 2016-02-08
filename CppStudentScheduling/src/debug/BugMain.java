@@ -1,8 +1,8 @@
 package debug;
 
-import javax.print.attribute.standard.MediaSize.Engineering;
 
 import core.CPP;
+import core.ClassRoom;
 import course.Coursee;
 import course.English;
 import course.Science;
@@ -30,20 +30,20 @@ public class BugMain {
 //		Major[] strictions = {new Geophysics(), new Mechanical()};
 //		Coursee phys = new Science("d",1,2, null, null, false, false, null);
 //		System.out.println(phys.canStudy(ali));
+////		
+//		Coursee[] c = cpp.getAvailableCourses();
+//		for (int i = 0; i < c.length; i++) {
+//			ali.addCourse(c[i]);
+//		}
+//		ali.printAllCourses();
+//
+//		ali.passAllCourses();
+//		for (int i = 0; i < c.length; i++) {
+//			ali.addCourse(c[i]);
+//		}
+//		ali.printCurrentCourses();
 //		
-		Coursee[] c = cpp.getAvailableCourses();
-		for (int i = 0; i < c.length; i++) {
-			ali.addCourse(c[i]);
-		}
-		ali.printAllCourses();
-
-		ali.passAllCourses();
-		for (int i = 0; i < c.length; i++) {
-			ali.addCourse(c[i]);
-		}
-		ali.printCurrentCourses();
-		
-		
+//		
 //		Coursee[] c1 = {eng021, sd, sd, sd, sd};
 //		Coursee[] c2 = {sd, eng021, eng021};
 //		Coursee[] c3 = Coursee.mergeCourses(c1, c2);
@@ -52,5 +52,8 @@ public class BugMain {
 //		}
 //	
 		//System.out.println(new Mechanical().instanceOf(ali.getMajor()));
+		
+		ClassRoom room = new ClassRoom("d132", ClassRoom.DES_GYM);
+		System.out.println(room);
 	}
 }

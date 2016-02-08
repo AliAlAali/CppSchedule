@@ -5,10 +5,15 @@ import course.Science;
 
 public class Physics extends Engineering{
 
+	public Physics() {
+		this.title = "Physics";
+	}
+	
 	@Override
 	public boolean instanceOf(Object son) {
 		return super.isInstanceOf(new Physics(), son);
 	}
 
+	
 	
 }

@@ -22,11 +22,8 @@ public class Student {
 	private int periodsAWeek;
 	
 	private String name;
-	private String track;	//engineer, science, etc.
 	private String level;	//CH CR BR AR
-	//private String department;
-	private String major;
-	private Major majorr;
+	private Major major;
 
 	private char gender;
 	
@@ -36,7 +33,7 @@ public class Student {
 		this.name = name;
 		this.badge  = badge;
 		this.level = lvl;
-		this.majorr = major;
+		this.major = major;
 		courses = new ArrayList<Coursee>();
 	}
 	
@@ -44,13 +41,8 @@ public class Student {
 		return level;
 	}
 	
-	public String getTrack(){
-		return track;
-	}
-	
-	
 	public Major getMajor(){
-		return majorr;
+		return major;
 	}
 	
 	public ArrayList<Coursee> getCourses(){
