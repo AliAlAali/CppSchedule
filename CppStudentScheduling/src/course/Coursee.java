@@ -223,5 +223,9 @@ public class Coursee {
 	public void setLevel(String level) {
 		this.level = level;
 	}
+	
+	public Major[] getStrictions(){
+		return strictTo;
+	}
 
 }
