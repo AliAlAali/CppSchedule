@@ -18,7 +18,7 @@ public class ClassRoom {
 	public static String DES_CH_LAB = "Physics & Chemistry Lab";
 	public static String DES_GEOL_LAB = "Geology Lab";
 
-	public static int MAX_STUDENTS = 14;
+	public static int MAX_STUDENTS = 18;
 
 	private String roomId;
 	private char building;

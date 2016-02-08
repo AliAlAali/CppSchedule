@@ -43,6 +43,8 @@ public class CPP {
 	public static final String LVL_C = "C";
 	public static final String LVL_CR = "CR";
 	public static final String LVL_CH = "CH";
+	
+	public static final int studentNum = 300;
 
 	private Coursee[] courses; // array of offered courses
 
