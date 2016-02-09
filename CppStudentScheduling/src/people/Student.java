@@ -91,7 +91,7 @@ public class Student {
 	public void printCurrentCourses(){
 		for (Coursee coursee : courses) {
 			if(!coursee.isPassed())
-				System.out.print(coursee.getSubject() + " ");
+				System.out.print(coursee.getSubject()+ " ");
 		}
 		System.out.println();
 	}
@@ -99,6 +99,36 @@ public class Student {
 	public void passAllCourses(){
 		for (Coursee coursee : courses) {
 			coursee.setPassed(true);
+		}
+	}
+	
+	public int getCurrentWeekHours(){
+		int hours = 0;
+		for (int i = 0; i < courses.size(); i++) {
+			if(!courses.get(i).isPassed()){
+				hours += courses.get(i).getPeriodsADay()*courses.get(i).getPeriodsPerWeek();
+			}
+		}
+		return hours;
+	}
+	
+	public void selectiveCourseAdd(Coursee[] c){
+		/*
+		 * This method can be called to add new courses each trimester
+		 *  1 - Add courses that student can study (Parioriy) within the time available
+		 *  2 - Add rest of the courses student can study(non-pariority ones)
+		 *  3...
+		 */
+		
+		for (int i = 0; i < c.length; i++) {
+			if(getCurrentWeekHours()  + c[i].getWeekHours() < MAX_PERIODS_WEEK  && c[i].isPriority() && getMajor().relation(c[i]) >= Major.MAX_RELATION_SCORE){
+				addCourse(c[i]);
+			}
+		}
+		for (int i = 0; i < c.length; i++) {
+			if(getCurrentWeekHours()  + c[i].getWeekHours() < MAX_PERIODS_WEEK  && getMajor().relation(c[i]) >= Major.MAX_RELATION_SCORE){
+				addCourse(c[i]);
+			}
 		}
 	}
 

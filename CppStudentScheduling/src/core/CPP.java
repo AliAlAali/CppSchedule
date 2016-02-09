@@ -19,11 +19,13 @@ import majors.Petroleum;
 import majors.Physics;
 import people.Student;
 import people.Teacher;
+import course.ChemistryCourse;
 import course.ComputerStudies;
 import course.Coursee;
 import course.English;
 import course.GeneralStudies;
 import course.Mathematics;
+import course.PhysicsCourse;
 import course.Science;
 
 /*
@@ -101,31 +103,32 @@ public class CPP {
 		Major[] eng_comSc = {new ComputerScience(), new Engineering()};
 
 		// English courses
-		Coursee eng021 = new English("ENGL021", 2, 10, null, null, CPP.LVL_AR);
-		Coursee eng023 = new English("ENGL023", 2, 10, null, eng021, CPP.LVL_AR);
-		Coursee eng024 = new English("ENGL024", 2, 10, null, eng023, CPP.LVL_AR);
+		Coursee eng021 = new English("ENGL021", 2, 5, null, null, CPP.LVL_AR);
+		Coursee eng023 = new English("ENGL023", 2, 5, null, eng021, CPP.LVL_AR);
+		Coursee eng024 = new English("ENGL024", 2, 5, null, eng023, CPP.LVL_AR);
 		Coursee eng031 = new English("ENGL031", 1, 4, null, null);
 		eng031.setPriority(false);
-		Coursee eng033 = new English("ENGL033", 2, 10, null, eng024, CPP.LVL_AR);
-		Coursee eng025 = new English("ENG025", 2, 10, null, null, LVL_C);
-		Coursee eng035 = new English("ENG035", 2, 10, null, eng025, LVL_C);
-		Coursee eng036 = new English("ENGL036", 2, 10, null, eng025);
-		Coursee eng043 = new English("ENGL043", 2, 10, null, eng036, CPP.LVL_AR);
+		Coursee eng033 = new English("ENGL033", 2, 5, null, eng024, CPP.LVL_AR);
+		Coursee eng025 = new English("ENG025", 2, 5, null, null, LVL_C);
+		Coursee eng035 = new English("ENG035", 2, 5, null, eng025, LVL_C);
+		Coursee eng036 = new English("ENGL036", 2, 5, null, eng025);
+		Coursee eng043 = new English("ENGL043", 2, 5, null, eng036, CPP.LVL_AR);
 
 		// General Studies
 		Coursee pf1 = new GeneralStudies("PF1", 2, ClassRoom.DES_GYM, null);
 		Coursee pf2 = new GeneralStudies("PF2", 2, ClassRoom.DES_GYM, pf1);
 		Coursee cs010 = new GeneralStudies("CS010", 1, null, null);
 		Coursee hs010 = new GeneralStudies("HS010", 1, null, null);
-		Coursee icut030 = new GeneralStudies("ICUT030", 1, null, null);
+		hs010.setPeriodsPerWeek(2);
+		Coursee icut030 = new GeneralStudies("ICUT030", 1, null, cs010);
 
 		// pure science - NEED TO PUT RESTRICTIONS TO THE MAJOR AND INSTANCE OF
-		Coursee appp031 = new Science("APPP031", 1, 4, null, null, true, false, null);
+		Coursee appp031 = new PhysicsCourse("APPP031", 1, 4, null, null, true, false, null);
 		Coursee appp032 = new Science("APPP032", 1, 4, null, appp031, true, false, physics);
 		Coursee appc033 = new Science("APPC033", 1, 4, null, appp032, true, false, physics);
 		Coursee phys045 = new Science("PHYS045", 1, 4, ClassRoom.DES_PH_LAB, appc033, false, true, mechanical_electrical_stric);
 		Coursee geo020 = new Science("GEO020", 1, 4, ClassRoom.DES_GEOL_LAB, null, false, true, geology_geophysics_Pertl_stric);
-		Coursee apcp035 = new Science("APCP035", 1, 4, null, null, true, false, null);
+		Coursee apcp035 = new ChemistryCourse("APCP035", 1, 4, null, null, true, false, null);
 		Coursee appp041 = new Science("APPP041", 1, 4, null, null, true, false, petrol);
 		Coursee apch050 = new Science("APCH050", 1, 4, null, appp041, true, false, chemist);
 		Coursee apch051 = new Science("APCH051", 1, 4, null, apch050, true, false, chemist);
@@ -140,23 +143,24 @@ public class CPP {
 		//Business
 		
 		//Computer Studies & Technology
-		Coursee cswp010 = new ComputerStudies("CSWP010", 1, 4, ClassRoom.DES_COM_LAB, null, false, null);
+		Coursee apcs101 = new ComputerStudies("APCS101", 1, 4, null, null, true ,compSc);
+		Coursee apcs102 = new ComputerStudies("APCS102", 1, 4, null, apcs101, true ,compSc);
+		Coursee apcs103 = new ComputerStudies("APCS103", 1, 4, null, apcs102, true ,compSc);
+		Coursee csca101 = new ComputerStudies("CSCA101", 1, 4, null, null, false ,computers);
+		Coursee cswp010 = new ComputerStudies("CSWP010", 1, 3, ClassRoom.DES_COM_LAB, null, false, null);
 		Coursee csas030 = new ComputerStudies("CSAS030", 1, 4, ClassRoom.DES_COM_LAB, null, false, null);
 		Coursee csjv101 = new ComputerStudies("CSJV010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,engineer);
 		Coursee cscp101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false ,CPP.LVL_AR, null);
 		Coursee cscp0101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,business);
 		Coursee csdb101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,business);
-		Coursee apcs101 = new ComputerStudies("APCS101", 1, 4, null, null, false ,compSc);
-		Coursee apcs102 = new ComputerStudies("APCS102", 1, 4, null, apcs101, false ,compSc);
-		Coursee apcs103 = new ComputerStudies("APCS103", 1, 4, null, apcs102, false ,compSc);
-		Coursee csca101 = new ComputerStudies("CSCA101", 1, 4, null, null, false ,computers);
+		
 
 		
 
 		Coursee[] courses = { eng021, eng023, eng024, eng025, eng031, eng033,
 				eng035, eng036, eng043, pf1, pf2, cs010, hs010, icut030, appp031, appp032, appc033, phys045,geo020,
-				apcp035 , appp041, apch050, apch051, chem041, math101, math102, apca040, csdm101, cswp010, csas030,
-				csjv101, cscp101, cscp0101, csdb101, apcs101, apcs102, apcs103, csca101};
+				apcp035 , appp041, apch050, apch051, chem041, math101, math102, apca040, csdm101, apcs101, apcs102, apcs103,cswp010, csas030,
+				csjv101, cscp101, cscp0101, csdb101,  csca101};
 		return courses;
 
 	}
@@ -228,6 +232,7 @@ public class CPP {
 		rooms.add(new ClassRoom("e108"));
 		rooms.add(new ClassRoom("e110"));
 		rooms.add(new ClassRoom("Lab", ClassRoom.DES_PH_LAB, 40, 'E'));
+		rooms.add(new ClassRoom("GYM", ClassRoom.DES_GYM));
 
 
 

@@ -227,5 +227,9 @@ public class Coursee {
 	public Major[] getStrictions(){
 		return strictTo;
 	}
+	
+	public int getWeekHours(){
+		return periodsADay*periodsPerWeek;
+	}
 
 }

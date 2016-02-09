@@ -9,6 +9,8 @@ import course.Coursee;
 
 public class Major {
 	
+	public static final int MAX_RELATION_SCORE = 10;
+	
 	protected Coursee[] courses;
 	protected String title;
 
@@ -35,6 +37,9 @@ public class Major {
 		return isInstanceOf(new Major(), son);
 	}
 	
+	public int relation(Coursee course){
+		return 10;
+	}
 	
 	
 }

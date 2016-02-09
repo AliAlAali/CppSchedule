@@ -45,6 +45,8 @@ public class Teacher{
 		}
 		return score;
 	}
+	
+	//Should also cover teacher total working hours
 	public int compareTo(Teacher o, Coursee course) {
 		int me = evaluateCourse(course);
 		int him = o.evaluateCourse(course);
