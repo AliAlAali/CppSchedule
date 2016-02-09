@@ -3,6 +3,7 @@ package people;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.Schedule;
 import majors.Major;
 import course.Coursee;
 
@@ -24,6 +25,7 @@ public class Student {
 	private String name;
 	private String level;	//CH CR BR AR
 	private Major major;
+	private Schedule sch[];
 
 	private char gender;
 	
@@ -35,6 +37,10 @@ public class Student {
 		this.level = lvl;
 		this.major = major;
 		courses = new ArrayList<Coursee>();
+		sch = new Schedule[3];
+		sch[0] = new Schedule(1);
+		sch[1] = new Schedule(2);
+		sch[2] = new Schedule(3);
 	}
 	
 	public String getLevel(){
@@ -110,6 +116,34 @@ public class Student {
 			}
 		}
 		return hours;
+	}
+	
+	public Schedule getSchedule(int trim){
+		for (int i = 0; i < sch.length; i++) {
+			if(sch[i].getTrim() == trim){
+				return sch[i];
+			}
+		}
+		return null;
+	}
+	
+	public boolean isBusy(int trim,int d, int p){
+		if(getSchedule(trim).getPeriod(d,p) == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	public void printScheduleData(int trim){
+		for (int i = 0; i < sch[trim].getCourses().length; i++) {
+			for (int j = 0; j < sch[trim].getCourses()[i].length; j++) {
+				if(sch[trim].getCourses()[i][j] != null){
+				System.out.print(sch[trim].getCourses()[i][j].getSubject() + " ");
+				}
+			}
+			System.out.println();
+		}
 	}
 	
 	public void selectiveCourseAdd(Coursee[] c){

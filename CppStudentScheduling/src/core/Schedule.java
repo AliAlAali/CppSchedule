@@ -18,6 +18,9 @@ public class Schedule {
 		this.sch[d][p] = value; 
 	}
 	
+	public Coursee getPeriod(int d, int p){
+		return sch[d][p];
+	}
 	public boolean amend(int day,Coursee course){
 		/*
 		 * Replace first null value that comes after a non-null value from the end
@@ -57,6 +60,28 @@ public class Schedule {
 			}
 		}
 	}
+	
+	public boolean exist(Coursee course){
+		for (int i = 0; i < sch.length; i++) {
+			for (int j = 0; j < sch[i].length; j++) {
+				if(sch[i][j].getSubject().equals(course.getSubject())){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean exist(String course){
+		for (int i = 0; i < sch.length; i++) {
+			for (int j = 0; j < sch[i].length; j++) {
+				if(sch[i][j] != null && sch[i][j].getSubject().equals(course)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public int getTrim() {
 		return trim;
@@ -64,6 +89,21 @@ public class Schedule {
 
 	public void setTrim(int trim) {
 		this.trim = trim;
+	}
+	
+	public Coursee[][] getCourses(){
+		return sch;
+	}
+	
+	public void printData(){
+		for (int i = 0; i < sch.length; i++) {
+			for (int j = 0; j < sch[i].length; j++) {
+				if(sch[i][j] != null){
+					System.out.print(sch[i][j].getSubject() + " ");
+				}
+			}
+			System.out.println();
+		}
 	}
 	
 	

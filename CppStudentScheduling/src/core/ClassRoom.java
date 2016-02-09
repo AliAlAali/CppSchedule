@@ -21,8 +21,9 @@ public class ClassRoom {
 	public static int MAX_STUDENTS = 18;
 
 	private String roomId;
-	private char building;
 	private String tools;
+	private int booked;
+	private char building;
 	private int size;
 
 	private List<Student> students;
@@ -33,6 +34,7 @@ public class ClassRoom {
 		this.roomId = id;
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = size;
+		this.booked = 0;
 	}
 	
 	public ClassRoom(String id, String tools, int size, char build) {
@@ -41,6 +43,7 @@ public class ClassRoom {
 		this.roomId = id;
 		this.building =  build;
 		this.size = size;
+		this.booked = 0;
 	}
 	
 	public ClassRoom(String id, String tools) {
@@ -49,6 +52,7 @@ public class ClassRoom {
 		this.roomId = id.toUpperCase();
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = MAX_STUDENTS;
+		this.booked = 0;
 	}
 
 	public ClassRoom(String id) {
@@ -57,6 +61,7 @@ public class ClassRoom {
 		this.roomId = id.toUpperCase();
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = MAX_STUDENTS;
+		this.booked = 0;
 	}
 	
 	@Override
@@ -88,6 +93,25 @@ public class ClassRoom {
 	public void setSize(int size) {
 		this.size = size;
 	}
+
+	public int getBooked() {
+		return booked;
+	}
+
+	public void Book(int booked) {
+		this.booked = booked;
+	}
+	
+	public boolean isFull(){
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i) == null){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	
 	
 }

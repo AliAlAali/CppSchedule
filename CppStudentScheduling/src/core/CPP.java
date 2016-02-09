@@ -51,7 +51,7 @@ public class CPP {
 	private Coursee[] courses; // array of offered courses
 
 	private List<Teacher> teachers;
-	private List<Student> students;
+	private ArrayList<Student> students;
 
 	private List<ClassRoom> rooms;
 	private Major[] majors;
@@ -62,10 +62,62 @@ public class CPP {
 		rooms = new ArrayList<ClassRoom>();
 		courses = initializeCourses();
 		majors = initializeMajors();
+		addStudents();
 	}
 
-	public CPP(List<Teacher> teachers) {
-
+	public int numOfStudentEnrolled(Coursee course, int trim){
+		int num = 0;
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i).getSchedule(trim).exist(course)){
+				num++;
+			}
+		}
+		return num;
+	}
+	
+	public int numOfStudentHaveCourse(Coursee course){
+		/*
+		 * Returns the number of students who have the course in their schedule
+		 */
+		int num = 0;
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i).findCourse(course.getSubject()) != null){
+				num++;
+			}
+		}
+		return num;
+	}
+	
+	public int numOfStudentHaveCourse(String course){
+		/*
+		 * Returns the number of students who should study a course
+		 */
+		int num = 0;
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i).findCourse(course) != null){
+				num++;
+			}
+		}
+		return num;
+	}
+	
+	public int numOfStudentEnrolled(String course, int trim){
+		int num = 0;
+		for (int i = 0; i < students.size(); i++) {
+			if(students.get(i).getSchedule(trim).exist(course)){
+				num++;
+			}
+		}
+		return num;
+	}
+	
+	public ClassRoom findNormalRoom(){
+		for (int i = 0; i < rooms.size(); i++) {
+			if(rooms.get(i).getBooked() == 0 && rooms.get(i).getTools() == null){
+				return rooms.get(i);
+			}
+		}
+		return null;
 	}
 	
 	private Major[] initializeMajors(){
@@ -543,5 +595,9 @@ public class CPP {
 		students.add(new Student("Abdullah Bakulka",781917, CPP.LVL_BR, new Mechanical()));
 		students.add(new Student("Mohammad Jacob",781918, CPP.LVL_CR, new ComputerEngineer()));
 		students.add(new Student("Raif Jacob",781919, CPP.LVL_BR, new ComputerEngineer()));
+	}
+	
+	public ArrayList<Student> getStudents(){
+		return students;
 	}
 }
