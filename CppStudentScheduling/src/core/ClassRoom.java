@@ -103,12 +103,16 @@ public class ClassRoom {
 	}
 	
 	public boolean isFull(){
-		for (int i = 0; i < students.size(); i++) {
-			if(students.get(i) == null){
-				return false;
-			}
+		if(size > students.size()){
+			return false;
 		}
 		return true;
+	}
+	
+	public void addStudent(Student student){
+		if(!isFull()){
+			students.add(student);
+		}
 	}
 	
 	

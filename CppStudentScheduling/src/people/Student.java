@@ -55,6 +55,9 @@ public class Student {
 		return courses;
 	}
 	
+	public String getName(){
+		return this.name;
+	}
 	public boolean addCourse(Coursee course){
 		if(course != null){
 			for (int i = 0; i < courses.size(); i++) {
@@ -73,6 +76,15 @@ public class Student {
 	public Coursee findCourse(String subject){
 		for (int i = 0; i < courses.size(); i++) {
 			if(courses.get(i).getSubject().equals(subject)){
+				return courses.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Coursee findCourse(Coursee course){
+		for (int i = 0; i < courses.size(); i++) {
+			if(courses.get(i).getSubject().equals(course.getSubject())){
 				return courses.get(i);
 			}
 		}
@@ -152,6 +164,7 @@ public class Student {
 		 *  1 - Add courses that student can study (Parioriy) within the time available
 		 *  2 - Add rest of the courses student can study(non-pariority ones)
 		 *  3...
+		 *  TODO IN TRIMISTER 3 ADD LOWER RELATION COURSES USING DIFFERENT METHOD
 		 */
 		
 		for (int i = 0; i < c.length; i++) {

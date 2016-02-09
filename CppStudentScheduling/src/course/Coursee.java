@@ -18,6 +18,7 @@ public class Coursee {
 	private String specialRequirement; // like gym, lab, computer lab
 	private String subject;
 	private String level;
+	private String room;
 
 	private boolean passed;
 	private boolean honor;
@@ -141,6 +142,14 @@ public class Coursee {
 
 	public void setPeriodsADay(int periodsADay) {
 		this.periodsADay = periodsADay;
+	}
+	
+	public void setRoom(String r){
+		this.room = r;
+	}
+	
+	public String getRoom(){
+		return this.room;
 	}
 
 	public boolean isQualified(Student student) {
