@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import people.Student;
+import sun.security.krb5.SCDynamicStoreConfig;
 
 /*
 *Ali alAali
@@ -27,6 +28,7 @@ public class ClassRoom {
 	private int size;
 
 	private List<Student> students;
+	private Schedule schedule;
 
 	public ClassRoom(String id, String tools, int size) {
 		students = new ArrayList<Student>();
@@ -35,6 +37,7 @@ public class ClassRoom {
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = size;
 		this.booked = 0;
+		this.schedule = new Schedule(0);
 	}
 	
 	public ClassRoom(String id, String tools, int size, char build) {
@@ -44,6 +47,7 @@ public class ClassRoom {
 		this.building =  build;
 		this.size = size;
 		this.booked = 0;
+		this.schedule = new Schedule(0);
 	}
 	
 	public ClassRoom(String id, String tools) {
@@ -53,6 +57,7 @@ public class ClassRoom {
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = MAX_STUDENTS;
 		this.booked = 0;
+		this.schedule = new Schedule(0);
 	}
 
 	public ClassRoom(String id) {
@@ -62,6 +67,7 @@ public class ClassRoom {
 		this.building =  id.toUpperCase().charAt(0);
 		this.size = MAX_STUDENTS;
 		this.booked = 0;
+		this.schedule = new Schedule(0);
 	}
 	
 	@Override
@@ -113,6 +119,17 @@ public class ClassRoom {
 		if(!isFull()){
 			students.add(student);
 		}
+	}
+	
+	public Schedule getSchedule(){
+		return this.schedule;
+	}
+	
+	public boolean isFree(int d, int p){
+		if(getSchedule().getPeriod(d, p) == null){
+			return true;
+		}
+		return false;
 	}
 	
 	

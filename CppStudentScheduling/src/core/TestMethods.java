@@ -1,23 +1,29 @@
-package debug;
-
+package core;
 
 import java.util.ArrayList;
 
-import core.CPP;
-import core.ClassRoom;
-import core.Schedule;
+import majors.Electrical;
+import people.Student;
 import course.Coursee;
 import course.English;
-import majors.ChemicalEngineering;
-import majors.ComputerScience;
-import majors.Electrical;
-import majors.Geology;
-import majors.Mechanical;
-import people.Student;
 
-public class BugMain {
+public class TestMethods {
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
+		
+//		ClassRoom room = new ClassRoom("D132", null);
+//		Coursee c = new English("ENGLISH", null, null, true);
+//		 c.setPeriodsADay(2);
+//		
+//		 System.out.println(new CPP().findEmptyNormalRoom(0, 0, 2));
+//		if(room.isFree(0, 0)){
+//			room.getSchedule().setPeriod(0, 0, c);
+//			room.getSchedule().setPeriod(0, 1, c);
+//		}
+//		
+//		room.getSchedule().printFormat();
+//		System.out.println(room.isFree(0, 0));
+		
 		CPP cpp = new CPP();
 		Student ali = new Student("Ali M Alaali", 781735, CPP.LVL_AR, new Electrical());
 		
@@ -43,21 +49,22 @@ public class BugMain {
 				continue;
 			}
 			classLoop:while(cpp.numOfStudentHaveCourse(c[i]) - cpp.numOfStudentEnrolled(c[i], 1) > 0 ){
-				if(c[i].getSpecialRequirement() == null && (r=cpp.findNormalRoom())!= null){//check if and get the best teacher can take this
+				for (int days = 0; days < 5; days++) {
+				if(c[i].getSpecialRequirement() == null && (r=cpp.findEmptyNormalRoom(days, p, c[i].getPeriodsADay()))!= null){//check if and get the best teacher can take this
 					r.Book(c[i].getPeriodsADay());
 					//set teacher schedule
 					while(!r.isFull()){
 						for (int j = 0; j < stu.size(); j++) {
-							if(stu.get(j).findCourse(c[i]) != null && !stu.get(j).isBusy(1, d, p)){
+							if(stu.get(j).findCourse(c[i]) != null && !stu.get(j).isBusy(1, days, p)){
 								//add the subject to his schedule
-								for (int day = 0; day < CPP.DAYS_WEEK; day++) {
+								
 									for (int cl = 0; cl < c[i].getPeriodsADay(); cl++) {
 										c[i].setRoom(r.getRoomId());
-										stu.get(j).getSchedule(1).setPeriod(day, p + cl, c[i]);
+										stu.get(j).getSchedule(1).setPeriod(days, p + cl, c[i]);
 										r.addStudent(stu.get(j));
-										r.getSchedule().setPeriod(day, p + cl, c[i]);
+										r.getSchedule().setPeriod(days, p + cl, c[i]);
 									}
-								}
+								
 							}else{
 								if(j + 1 == stu.size()){
 									break classLoop;
@@ -76,7 +83,7 @@ public class BugMain {
 				}else{
 					p = 0;
 				}
-			}
+			}}
 		}
 		
 		
@@ -91,7 +98,6 @@ public class BugMain {
 			cpp.getClassRooms().get(i).getSchedule().printFormat();
 			System.out.println();
 		}
-		
 		
 	}
 }

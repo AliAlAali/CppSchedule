@@ -128,6 +128,20 @@ public class CPP {
 		return null;
 	}
 	
+	public ClassRoom findEmptyNormalRoom(int d, int p, int num){
+		mainloop:for (int i = 0; i < rooms.size(); i++) {
+			if(rooms.get(i).getTools() == null && rooms.get(i).isFree(d, p)){
+				for (int j = p; j < p + num; j++) {
+					if(!rooms.get(i).isFree(d, j)){
+						 continue mainloop;
+					}
+				}
+				return rooms.get(i);
+			}
+		}
+		return null;
+	}
+	
 	private Major[] initializeMajors(){
 		Major comSc = new ComputerScience();
 		Major comEng = new ComputerEngineer();
@@ -256,6 +270,10 @@ public class CPP {
 	
 	public Major[] getMajors(){
 		return majors;
+	}
+	
+	public ArrayList<ClassRoom> getClassRooms(){
+		return (ArrayList<ClassRoom>) this.rooms;
 	}
 	
 	private void addRooms(){
