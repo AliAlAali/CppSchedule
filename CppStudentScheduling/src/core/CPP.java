@@ -128,6 +128,12 @@ public class CPP {
 		return null;
 	}
 	
+	public void UnbookAllClasses(){
+		for (int i = 0; i < rooms.size(); i++) {
+			rooms.get(i).Book(0);;
+		}
+	}
+	
 	public ClassRoom findEmptyNormalRoom(int d, int p, int num){
 		mainloop:for (int i = 0; i < rooms.size(); i++) {
 			if(rooms.get(i).getTools() == null && rooms.get(i).isFree(d, p)){
