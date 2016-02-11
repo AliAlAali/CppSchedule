@@ -17,12 +17,18 @@ public class Teacher{
 	
 	private Coursee[] teach;//courses the teacher can teaches.
 	private String name;
+	private String subjects[];
 	private Major major;
 	
-	public Teacher(String n, Major major,Coursee[] teach){
+	public Teacher(String n,Coursee[] teach){
 		this.name = n;
-		this.major = major;
 		this.teach = teach;
+	}
+	
+	public Teacher(String n,String[] teach){
+		this.name = n;
+		if(teach != null)
+			this.subjects = teach;
 	}
 	public boolean canTeach(Coursee course){
 		for (int i = 0; i < teach.length; i++) {
@@ -58,5 +64,21 @@ public class Teacher{
 		}else{
 			return 0;
 		}
+	}
+	
+	public void setSubjects(String[] subjects) {
+		this.subjects = subjects;
+	}
+	
+	@Override
+	public String toString() {
+		String s = name + "\n";
+		if(subjects == null){
+			return s;
+		}
+		for (int i = 0; i < subjects.length; i++) {
+			s += subjects[i] + " ";
+		}
+		return s;
 	}
 }

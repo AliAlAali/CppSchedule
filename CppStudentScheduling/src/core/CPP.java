@@ -64,6 +64,7 @@ public class CPP {
 		courses = initializeCourses();
 		majors = initializeMajors();
 		addStudents();
+		addTeachers();
 		addRooms();
 	}
 
@@ -330,6 +331,10 @@ public class CPP {
 
 
 		
+	}
+	
+	private void addTeachers(){
+		this.teachers = new Reader().getTeachers();
 	}
 	
 	private void addStudents(){

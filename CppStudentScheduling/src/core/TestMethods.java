@@ -10,22 +10,8 @@ public class TestMethods {
 
 	public static void main(String[] args) {
 
-		// ClassRoom room = new ClassRoom("D132", null);
-		// Coursee c = new English("ENGLISH", null, null, true);
-		// c.setPeriodsADay(2);
-		//
-		// System.out.println(new CPP().findEmptyNormalRoom(0, 0, 2));
-		// if(room.isFree(0, 0)){
-		// room.getSchedule().setPeriod(0, 0, c);
-		// room.getSchedule().setPeriod(0, 1, c);
-		// }
-		//
-		// room.getSchedule().printFormat();
-		// System.out.println(room.isFree(0, 0));
-
+		
 		CPP cpp = new CPP();
-		Student ali = new Student("Ali M Alaali", 781735, CPP.LVL_AR, new Electrical());
-
 		Coursee[] c = cpp.getAvailableCourses();
 		ArrayList<Student> stu = cpp.getStudents();
 		ClassRoom r;
