@@ -1,6 +1,8 @@
 package people;
-import course.Coursee;
+import java.util.ArrayList;
+
 import majors.Major;
+import course.Coursee;
 
 /*
 *Ali alAali
@@ -39,35 +41,65 @@ public class Teacher{
 		return false;
 	}
 	
-	public int evaluateCourse(Coursee course){
-		int score = 0;
-		if(canTeach(course)){
-			score = 75;
-		}
-		for (int i = 0; i < course.getStrictions().length; i++) {
-			if(major.instanceOf(course.getStrictions()[i])){
-				score += 5;
-			}
-		}
-		return score;
+	public int getWorkingHoursPerWeek() {
+		return hoursPerWeek;
 	}
 	
-	//Should also cover teacher total working hours
-	public int compareTo(Teacher o, Coursee course) {
-		int me = evaluateCourse(course);
-		int him = o.evaluateCourse(course);
-		
-		if(me > him){
-			return him - me;
-		}else if(him > me){
-			return him - me;
+	public int getTeachingScore(Coursee course){
+		/*
+		 * Distinguish between teachers of the same course
+		 * by the number of hourse they work
+		 */
+		if(canTeach(course)){
+			return getWorkingHoursPerWeek() * -5 + 200;
 		}else{
-			return 0;
+			return -1;
 		}
 	}
 	
 	public void setSubjects(String[] subjects) {
 		this.subjects = subjects;
+	}
+	
+	public Coursee[] getCourses(){
+		return teach;
+	}
+	
+	public void assignTeachingCourses(Coursee[] c){
+		if(subjects == null){
+			teach = new Coursee[0];
+			return;
+		}
+		ArrayList<Coursee> courses = new ArrayList<Coursee>();
+		for (int i = 0; i < c.length; i++) {
+			for (int j = 0; j < subjects.length; j++) {
+				if(c[i].getSubject().equalsIgnoreCase(subjects[j])){
+					courses.add(c[i]);
+				}
+			}
+		}
+		
+		teach = new Coursee[courses.size()];
+		for (int i = 0; i < teach.length; i++) {
+			teach[i] = courses.get(i);
+		}
+	}
+	
+	public void printCourses(){
+		/*
+		 * used for debugging
+		 */
+		for (int i = 0; i < teach.length; i++) {
+			System.out.print(teach[i].getSubject() + " ");
+		}
+	}
+	
+	
+	public void addWorkHours(int hrs){
+		/*
+		 * debugging
+		 */
+		this.hoursPerWeek += hrs;
 	}
 	
 	@Override

@@ -149,6 +149,38 @@ public class CPP {
 		return null;
 	}
 	
+	public Teacher getSuggestedTeacher(Coursee course){
+		/*
+		 * get best teachers using getTeachScore() in Teacher.class
+		 * then find the one with less courses to teach
+		 * if teachers are equal choose anyone. 
+		 */
+		Teacher[] best = new Teacher[teachers.size()];
+		int score = 0;
+		for (int i = 0; i < best.length ; i++) {
+			if(teachers.get(i).getTeachingScore(course)>score){
+				for (int j = 0; j < best.length; j++) {
+					best[j] = null;
+				}
+				score = teachers.get(i).getTeachingScore(course);
+				best[i] = teachers.get(i);
+			}else if(teachers.get(i).getTeachingScore(course) == score){
+				best[i] = teachers.get(i);
+			}
+		}
+		
+		Teacher chosen = null;
+		int lowest = Integer.MAX_VALUE;
+		for (int i = 0; i < best.length; i++) {
+			if(best[i] != null && best[i].getCourses().length < lowest){
+				chosen = best[i];
+				lowest = chosen.getCourses().length;
+			}
+		}
+		return chosen;
+		
+	}
+	
 	private Major[] initializeMajors(){
 		Major comSc = new ComputerScience();
 		Major comEng = new ComputerEngineer();
@@ -233,7 +265,7 @@ public class CPP {
 		Coursee csjv101 = new ComputerStudies("CSJV010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,engineer);
 		Coursee cscp101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false ,CPP.LVL_AR, null);
 		Coursee cscp0101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,business);
-		Coursee csdb101 = new ComputerStudies("CSCP010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,business);
+		Coursee csdb101 = new ComputerStudies("CSDB010", 1, 4, ClassRoom.DES_COM_LAB, null, false, CPP.LVL_C ,business);
 		
 
 		
@@ -334,7 +366,11 @@ public class CPP {
 	}
 	
 	private void addTeachers(){
+		//Courses must be initialized before calling this method
 		this.teachers = new Reader().getTeachers();
+		for (int i = 0; i < teachers.size(); i++) {
+			teachers.get(i).assignTeachingCourses(courses);
+		}
 	}
 	
 	private void addStudents(){
