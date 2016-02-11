@@ -38,24 +38,36 @@ public class TestMethods {
 		for (int i = 0; i < stu.size(); i++) {
 			stu.get(i).selectiveCourseAdd(c);
 		}
+		
 
 		for (int day = 0; day < CPP.DAYS_WEEK; day++) {
 			for (int per = 0; per < 6; per++) {
 				for (int i = 0; i < c.length; i++) {
-					if (!c[i].isPriority() && cpp.numOfStudentHaveCourse(c[i]) <= 0) {
+					if ((!c[i].isPriority() || cpp.numOfStudentHaveCourse(c[i]) <= 0) || c[i].getSpecialRequirement() != null) {
 						continue;
 					}
-					System.out.println(day + "  " + per);
+					//System.out.println(2 + "  " + per);
 					r = cpp.findEmptyNormalRoom(day, per, c[i].getPeriodsADay());
-					while (cpp.numOfStudentHaveCourse(c[i]) - cpp.numOfStudentEnrolled(c[i], 1) > 0 && r != null) {
+					addclass:while (cpp.numOfStudentHaveCourse(c[i]) - cpp.numOfStudentEnrolled(c[i], 1, day) > 0 && r != null) {
+//						System.out.println("Have: " + cpp.numOfStudentHaveCourse(c[i]) + "  Enroll: " + cpp.numOfStudentEnrolled(c[i], 1));
+//						System.out.println(r);
+//						r.getSchedule().printFormat();
 						if (r != null) {
 							for (int s = 0; s < stu.size(); s++) {
 								if (stu.get(s).findCourse(c[i]) != null
-										&& stu.get(s).getSchedule(1).getPeriod(day, per) == null) {
+										&& stu.get(s).getSchedule(1).getPeriod(day, per) == null && !stu.get(s).isCourseScheduled(1, day, c[i])) {
 									if (!r.isFull()) {
+										for (int cl = 0; cl < c[i].getPeriodsADay(); cl++) {
+											stu.get(s).getSchedule(1).setPeriod(day, per + cl, c[i]);
+											r.getSchedule().setPeriod(day, per + cl, c[i]);
+										}
 										r.addStudent(stu.get(s));
 										c[i].setRoom(r.getRoomId());
-										r.getSchedule().setPeriod(day, per, c[i]);
+										
+									}
+								}else{
+									if(s >= stu.size()-1 && r != null){
+										break addclass;
 									}
 								}
 							}
@@ -64,7 +76,9 @@ public class TestMethods {
 					}
 
 				}
+				cpp.clearRooms();
 			}
+			
 		}
 
 		for (int i = 0; i < stu.size(); i++) {
@@ -72,6 +86,8 @@ public class TestMethods {
 			stu.get(i).getSchedule(1).printFormat();
 			System.out.println();
 		}
+		
+		System.out.println("============================= ROOMS =================================");
 
 		for (int i = 0; i < cpp.getClassRooms().size(); i++) {
 			System.out.println(cpp.getClassRooms().get(i));

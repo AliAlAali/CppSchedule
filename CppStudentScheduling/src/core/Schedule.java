@@ -63,6 +63,9 @@ public class Schedule {
 		}
 	}
 
+	/*
+	 * checks whether a course exist in the schedule
+	 */
 	public boolean exist(Coursee course) {
 		for (int i = 0; i < sch.length; i++) {
 			for (int j = 0; j < sch[i].length; j++) {
@@ -75,6 +78,23 @@ public class Schedule {
 		return false;
 	}
 
+	/*
+	 * checks whether a course exist in the schedule at a particular day
+	 */
+	public boolean exist(Coursee course, int day) {
+		for (int j = 0; j < sch[day].length; j++) {
+			if (sch[day][j] != null
+					&& sch[day][j].getSubject().equals(course.getSubject())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/*
+	 * checks whether a course exist in the schedule
+	 */
 	public boolean exist(String course) {
 		for (int i = 0; i < sch.length; i++) {
 			for (int j = 0; j < sch[i].length; j++) {
@@ -116,7 +136,7 @@ public class Schedule {
 			for (int j = 0; j < sch[i].length; j++) {
 				if (sch[i][j] != null) {
 					s += sch[i][j].getSubject() + "   ";
-				}else{
+				} else {
 					s += " - ";
 				}
 			}
@@ -124,18 +144,18 @@ public class Schedule {
 		}
 		return s;
 	}
-	
-	public void printFormat(){
+
+	public void printFormat() {
 		for (int i = 0; i < sch.length; i++) {
 			for (int j = 0; j < sch[i].length; j++) {
 				if (sch[i][j] != null) {
-					System.out.printf("%5s ",sch[i][j].getSubject());
-				}else{
-					System.out.printf("%5s ","[ - ]");
+					System.out.printf("%5s ", sch[i][j].getSubject());
+				} else {
+					System.out.printf("%5s ", "[ - ]");
 				}
 			}
 			System.out.println();
-			
+
 		}
 	}
 

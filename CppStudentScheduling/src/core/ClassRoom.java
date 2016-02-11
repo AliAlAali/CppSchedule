@@ -132,6 +132,9 @@ public class ClassRoom {
 		return false;
 	}
 	
+	public void removeAllStudents(){
+		students.clear();
+	}
 	
 	
 	

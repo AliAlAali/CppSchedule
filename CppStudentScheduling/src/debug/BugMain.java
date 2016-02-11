@@ -42,7 +42,7 @@ public class BugMain {
 			if(!c[i].isPriority()){
 				continue;
 			}
-			classLoop:while(cpp.numOfStudentHaveCourse(c[i]) - cpp.numOfStudentEnrolled(c[i], 1) > 0 ){
+			classLoop:while(cpp.numOfStudentHaveCourse(c[i]) - cpp.numOfStudentEnrolled(c[i], 1,d) > 0 ){
 				if(c[i].getSpecialRequirement() == null && (r=cpp.findNormalRoom())!= null){//check if and get the best teacher can take this
 					r.Book(c[i].getPeriodsADay());
 					//set teacher schedule
@@ -70,7 +70,7 @@ public class BugMain {
 			}
 			
 			
-			if(cpp.numOfStudentEnrolled(c[i], 1) > 0 ){
+			if(cpp.numOfStudentEnrolled(c[i], 1,d) > 0 ){
 				if(p + c[i].getPeriodsADay() < 7){
 					p += c[i].getPeriodsADay();
 				}else{

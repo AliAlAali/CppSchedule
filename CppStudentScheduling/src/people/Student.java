@@ -91,6 +91,24 @@ public class Student {
 		return null;
 	}
 	
+	public boolean isCourseScheduled(int trim,int d,Coursee course){
+		/*
+		 * check whether student have the course in the schedule 
+		 * in a particular day of a trim
+		 */
+		int num = 0;
+		for (int i = 0; i < sch[trim - 1].getCourses()[d].length; i++) {
+			if(sch[trim - 1].getCourses()[d][i] != null && sch[trim - 1].getCourses()[d][i].getSubject().equals(course.getSubject())){
+				num++;
+			}
+		}
+		if(num >= course.getPeriodsADay()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	public void passCourse(Coursee course){
 		for (int i = 0; i < courses.size(); i++) {
 			if(course.getSubject().equals(courses.get(i).getSubject())){

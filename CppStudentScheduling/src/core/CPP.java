@@ -67,13 +67,13 @@ public class CPP {
 		addRooms();
 	}
 
-	public int numOfStudentEnrolled(Coursee course, int trim){
+	public int numOfStudentEnrolled(Coursee course, int trim, int day){
 		/*
 		 * Returns the number of students who have the course in their schedule
 		 */
 		int num = 0;
 		for (int i = 0; i < students.size(); i++) {
-			if(students.get(i).getSchedule(trim).exist(course)){
+			if(students.get(i).getSchedule(trim).exist(course,day)){
 				num++;
 			}
 		}
@@ -280,6 +280,12 @@ public class CPP {
 	
 	public ArrayList<ClassRoom> getClassRooms(){
 		return (ArrayList<ClassRoom>) this.rooms;
+	}
+	
+	public void clearRooms(){
+		for (ClassRoom room : rooms) {
+			room.removeAllStudents();
+		}
 	}
 	
 	private void addRooms(){
