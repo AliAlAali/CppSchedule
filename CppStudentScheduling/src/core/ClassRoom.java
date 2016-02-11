@@ -136,6 +136,13 @@ public class ClassRoom {
 		students.clear();
 	}
 	
+	public void clear(){
+		/*
+		 * usually called after each trim...
+		 */
+		removeAllStudents();
+		schedule = new Schedule(0);
+	}
 	
 	
 }

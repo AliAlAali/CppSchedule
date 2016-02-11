@@ -176,6 +176,36 @@ public class Student {
 		}
 	}
 	
+	public int getNumCourseSchedule(int trim, Coursee course){
+		int n = 0;
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 7; j++) {
+				if(getSchedule(trim).getPeriod(i, j) != null && getSchedule(trim).getPeriod(i, j).getSubject().equals(course.getSubject())){
+					n++;
+				}
+			}
+		}
+		return n;
+	}
+	
+	public void passAllScheduleCourses(int trim, Coursee[] c){
+		for (int i = 0; i < c.length; i++) {
+			if(getSchedule(trim).exist(c[i])){
+				findCourse(c[i]).setPassed(true);
+			}
+		}
+	}
+	
+	public boolean hasPassedCourse(Coursee course){
+		for (int i = 0; i < courses.size(); i++) {
+			if(course.getSubject().equals(courses.get(i).getSubject())){
+				if(courses.get(i).isPassed()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	public void selectiveCourseAdd(Coursee[] c){
 		/*
 		 * This method can be called to add new courses each trimester

@@ -7,16 +7,49 @@ public class Schedule {
 	public static final int MAX = 3;
 
 	private Coursee[][] sch;
+	private String[][] primaryTitle;
+	private String[][] SecondaryTitle;
 	private int trim;
 
 	public Schedule(int trim) {
 		sch = new Coursee[5][7];
+		primaryTitle = new String[5][7];
+		SecondaryTitle = new String[5][7];
 		this.trim = trim;
 	}
 
 	public void setPeriod(int d, int p, Coursee value) {
 		this.sch[d][p] = value;
 	}
+
+	public void setPeriod(int d, int p, int length, Coursee course) {
+		for (int i = 0; i < length; i++) {
+			if (p + i < 7) {
+				this.sch[d][p + i] = course;
+			}
+		}
+	}
+	
+	public void setPeriod(int d, int p, Coursee course, String title) {
+		for (int i = 0; i < course.getPeriodsADay(); i++) {
+			if (p + i < 7) {
+				this.sch[d][p + i] = course;
+				this.primaryTitle[d][p + i] = title;
+			}
+		}
+	}
+	
+	public void setPeriod(int d, int p, Coursee course, String title, String secTitle) {
+		for (int i = 0; i < course.getPeriodsADay(); i++) {
+			if (p + i < 7) {
+				this.sch[d][p + i] = course;
+				this.primaryTitle[d][p + i] = title;
+				this.SecondaryTitle[d][p + i] = secTitle;
+			}
+		}
+	}
+	
+	
 
 	public Coursee getPeriod(int d, int p) {
 		return sch[d][p];
@@ -117,6 +150,14 @@ public class Schedule {
 	public Coursee[][] getCourses() {
 		return sch;
 	}
+	
+	public void clear(){
+		for (int i = 0; i < sch.length; i++) {
+			for (int j = 0; j < sch[i].length; j++) {
+				sch[i][j] = null;
+			}
+		}
+	}
 
 	public void printData() {
 		for (int i = 0; i < sch.length; i++) {
@@ -149,11 +190,28 @@ public class Schedule {
 		for (int i = 0; i < sch.length; i++) {
 			for (int j = 0; j < sch[i].length; j++) {
 				if (sch[i][j] != null) {
-					System.out.printf("%5s ", sch[i][j].getSubject());
+					System.out.printf("%10s ", sch[i][j].getSubject());
 				} else {
-					System.out.printf("%5s ", "[ - ]");
+					System.out.printf("%10s ", "[ - ]");
 				}
 			}
+			System.out.println();
+			for (int j = 0; j < primaryTitle[i].length; j++) {
+				if(primaryTitle[i][j] != null){
+					System.out.printf("%10s ", primaryTitle[i][j]);
+				}else{
+					System.out.printf("%10s ", "  -  ");
+				}
+			}
+			System.out.println();
+			for (int j = 0; j < SecondaryTitle[i].length; j++) {
+				if(SecondaryTitle[i][j] != null){
+					System.out.printf("%10s ", SecondaryTitle[i][j]);
+				}else{
+					System.out.printf("%10s ", "  -  ");
+				}
+			}
+			System.out.println();
 			System.out.println();
 
 		}
